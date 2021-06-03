@@ -1,10 +1,27 @@
 import React, { Component } from "react";
 import "../assets/styles/containers/App.css";
 
+import axios from "axios";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      users: [],
+    };
+  }
+  addRows = () =>
+    this.state.users.map((user) => (
+      <tr key={user.name}>
+        <td>{user.name}</td>
+        <td>{user.mail}</td>
+        <td>{user.link}</td>
+      </tr>
+    ));
+
+  async componentDidMount() {
+    const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+    this.setState = {
       users: [
         {
           name: "Jozek",
@@ -19,14 +36,6 @@ export default class App extends Component {
       ],
     };
   }
-  addRows = () =>
-    this.state.users.map((user) => (
-      <tr>
-        <td>{user.name}</td>
-        <td>{user.mail}</td>
-        <td>{user.link}</td>
-      </tr>
-    ));
 
   render() {
     return (
