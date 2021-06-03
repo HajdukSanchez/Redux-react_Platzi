@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import "../../assets/styles/components/Users.css";
 
 import axios from "axios";
+
 import { connect } from "react-redux";
+import * as usersActions from "../../actions/usersActions";
 
 class Users extends Component {
-  /* async componentDidMount() {
-    const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-    this.setState({ users: response.data });
-  } */
+  componentDidMount() {
+    /* const response = await axios.get("https://jsonplaceholder.typicode.com/users");
+    this.setState({ users: response.data }); */
+    this.props.fetchUsers();
+  }
 
   addRows = () =>
     this.props.users.map((user) => (
@@ -43,6 +46,4 @@ const mapStateToProps = (reducers) => {
 };
 
 // The first parameter is all the reducers the component is going to use
-export default connect(mapStateToProps, {
-  /* Actions */
-})(Users);
+export default connect(mapStateToProps, usersActions)(Users);
