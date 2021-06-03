@@ -2,22 +2,16 @@ import React, { Component } from "react";
 import "../../assets/styles/components/Users.css";
 
 import axios from "axios";
+import { connect } from "react-redux";
 
-export default class Users extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: [],
-    };
-  }
-
-  async componentDidMount() {
+class Users extends Component {
+  /* async componentDidMount() {
     const response = await axios.get("https://jsonplaceholder.typicode.com/users");
     this.setState({ users: response.data });
-  }
+  } */
 
   addRows = () =>
-    this.state.users.map((user) => (
+    this.props.users.map((user) => (
       <tr key={user.id}>
         <td>{user.name}</td>
         <td>{user.email}</td>
@@ -43,3 +37,12 @@ export default class Users extends Component {
     );
   }
 }
+
+const mapStateToProps = (reducers) => {
+  return reducers.usersReducers;
+};
+
+// The first parameter is all the reducers the component is going to use
+export default connect(mapStateToProps, {
+  /* Actions */
+})(Users);
