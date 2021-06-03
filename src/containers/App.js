@@ -10,32 +10,20 @@ export default class App extends Component {
       users: [],
     };
   }
-  addRows = () =>
-    this.state.users.map((user) => (
-      <tr key={user.name}>
-        <td>{user.name}</td>
-        <td>{user.mail}</td>
-        <td>{user.link}</td>
-      </tr>
-    ));
 
   async componentDidMount() {
     const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-    this.setState = {
-      users: [
-        {
-          name: "Jozek",
-          mail: "jozek@gmail.com",
-          link: "https://hajduk.com",
-        },
-        {
-          name: "Andrzej",
-          mail: "jozekHajduk@gmail.com",
-          link: "https://hajdukJozek.com",
-        },
-      ],
-    };
+    this.setState({ users: response.data });
   }
+
+  addRows = () =>
+    this.state.users.map((user) => (
+      <tr key={user.id}>
+        <td>{user.name}</td>
+        <td>{user.email}</td>
+        <td>{user.website}</td>
+      </tr>
+    ));
 
   render() {
     return (
@@ -44,8 +32,8 @@ export default class App extends Component {
           <thead>
             <tr>
               <th>Name</th>
-              <th>Mail</th>
-              <th>Link</th>
+              <th>Email</th>
+              <th>Website</th>
             </tr>
           </thead>
           {/* We add the JSX into our HTML */}
