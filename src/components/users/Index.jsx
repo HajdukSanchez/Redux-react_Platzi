@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "../../assets/styles/components/Users.css";
 
 import Loader from "../Loader";
+import Error from "../Error";
 
 import { connect } from "react-redux";
 import * as usersActions from "../../actions/usersActions";
@@ -22,6 +23,7 @@ class Users extends Component {
 
   render() {
     if (this.props.loading) return <Loader />;
+    if (this.props.error) return <Error message={this.props.error} />;
     return (
       <div>
         <table className='table'>
