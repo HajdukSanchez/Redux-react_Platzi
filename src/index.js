@@ -3,8 +3,9 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./containers/App";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import reduxThunk from "redux-thunk";
 
 import reducers from "./reducers";
 
@@ -13,7 +14,9 @@ const store = createStore(
   // All the reducers of our application
   reducers,
   // Initial state
-  {}
+  {},
+  // Middleware for makes calls to our reducers
+  applyMiddleware(reduxThunk)
 );
 
 ReactDOM.render(
