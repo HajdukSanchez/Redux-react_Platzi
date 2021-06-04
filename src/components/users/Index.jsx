@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../../assets/styles/components/Users.css";
 
+import Loader from "../Loader";
+
 import { connect } from "react-redux";
 import * as usersActions from "../../actions/usersActions";
 
@@ -19,6 +21,7 @@ class Users extends Component {
     ));
 
   render() {
+    if (this.props.loading) return <Loader />;
     return (
       <div>
         <table className='table'>

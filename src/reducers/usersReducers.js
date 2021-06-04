@@ -1,4 +1,4 @@
-import { ALL_USERS, LOADING. ERROR } from "../types/usersTypes";
+import { ALL_USERS, LOADING, ERROR } from "../types/usersTypes";
 
 // Initial state of this reducers
 const INITIAL_STATE = {
