@@ -1,0 +1,21 @@
+.table {
+  width: 100%;
+  text-align: left;
+}
+
+.table td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.table--center {
+  text-align: center;
+}
+
+.icon {
+  color: #253a46;
+}
+
+.icon:hover {
+  color: black;
+}
