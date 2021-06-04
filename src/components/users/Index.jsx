@@ -1,44 +1,22 @@
 import React, { Component } from "react";
 import "../../assets/styles/components/Users.css";
 
-import Loader from "../Loader";
-import Error from "../Error";
-
 import { connect } from "react-redux";
 import * as usersActions from "../../actions/usersActions";
+
+import Loader from "../Loader";
+import Error from "../Error";
+import Table from "./Table";
 
 class Users extends Component {
   componentDidMount() {
     this.props.fetchUsers();
   }
 
-  addRows = () =>
-    this.props.users.map((user) => (
-      <tr key={user.id}>
-        <td>{user.name}</td>
-        <td>{user.email}</td>
-        <td>{user.website}</td>
-      </tr>
-    ));
-
   render() {
     if (this.props.loading) return <Loader />;
     if (this.props.error) return <Error message={this.props.error} />;
-    return (
-      <div>
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Website</th>
-            </tr>
-          </thead>
-          {/* We add the JSX into our HTML */}
-          <tbody>{this.addRows()}</tbody>
-        </table>
-      </div>
-    );
+    return <Table title='Users' />;
   }
 }
 
