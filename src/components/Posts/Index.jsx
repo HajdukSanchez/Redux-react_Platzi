@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import * as usersActions from "../../actions/usersActions";
+import * as postsActions from "../../actions/postsActions";
 
 class Posts extends Component {
   componentDidMount() {
-    if (!this.props.users.length) this.props.fetchUsers();
+    if (!this.props.usersReducers.users.length) this.props.fetchUsers();
   }
 
   render() {
@@ -19,8 +21,14 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = (reducers) => {
-  return reducers.usersReducers;
+const mapStateToProps = ({ usersReducers, postsReducers }) => {
+  return { usersReducers, postsReducers };
 };
 
-export default connect(mapStateToProps, usersActions)(Posts);
+// This is a const to gave multiples reducers
+const mapDispatchToProps = {
+  ...usersActions,
+  ...postsActions,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts);
