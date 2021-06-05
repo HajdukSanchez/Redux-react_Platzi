@@ -13,7 +13,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOADING:
       return { ...state, loading: true };
     case ALL_USERS:
-      return { ...state, users: action.payload, loading: false };
+      return { ...state, users: action.payload, loading: false, error: "" };
     case ERROR:
       return { ...state, error: action.payload, loading: false };
     default:

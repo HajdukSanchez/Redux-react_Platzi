@@ -5,8 +5,9 @@ import * as usersActions from "../../actions/usersActions";
 import * as postsActions from "../../actions/postsActions";
 
 class Posts extends Component {
-  componentDidMount() {
-    if (!this.props.usersReducers.users.length) this.props.fetchUsers();
+  async componentDidMount() {
+    if (!this.props.usersReducers.users.length) await this.props.fetchUsers();
+    await this.props.getPostByUser(this.props.match.params.id);
   }
 
   render() {
@@ -25,10 +26,13 @@ const mapStateToProps = ({ usersReducers, postsReducers }) => {
   return { usersReducers, postsReducers };
 };
 
+// We assigned a name to one of the functions that we get
+const { fetchPostsByUser: getPostByUser } = postsActions;
+
 // This is a const to gave multiples reducers
 const mapDispatchToProps = {
   ...usersActions,
-  ...postsActions,
+  getPostByUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts);
