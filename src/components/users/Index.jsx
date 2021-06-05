@@ -9,8 +9,8 @@ import Error from "../Error";
 import Table from "./Table";
 
 class Users extends Component {
-  componentDidMount() {
-    this.props.fetchUsers();
+  async componentDidMount() {
+    if (!this.props.users.length) await this.props.fetchUsers();
   }
 
   render() {
