@@ -1,0 +1,7 @@
+.pub-title {
+  border-bottom: 1px solid black;
+}
+
+.pub-title:first-child {
+  border-top: 1px solid black;
+}
