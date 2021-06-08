@@ -4,19 +4,33 @@ import { connect } from "react-redux";
 import * as usersActions from "../../actions/usersActions";
 import * as postsActions from "../../actions/postsActions";
 
+import Loader from "../Loader";
+import Error from "../Error";
+
 class Posts extends Component {
   async componentDidMount() {
-    if (!this.props.usersReducers.users.length) await this.props.fetchUsers();
-    await this.props.getPostByUser(this.props.match.params.id);
+    // We restructured the variables
+    const {
+      fetchUsers,
+      getPostByUser,
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    if (!this.props.usersReducers.users.length) await fetchUsers();
+    if (!("latestPostsKey" in this.props.usersReducers.users[id])) await getPostByUser(id);
   }
 
   render() {
-    console.log(this.props);
+    const key = this.props.match.params.id;
+    const name = this.props.usersReducers.users[key].name;
+    if (this.props.usersReducers.loading) return <Loader />;
+    if (this.props.usersReducers.error) return <Error message={this.props.usersReducers.error} />;
     return (
       <div>
-        <h2>Posts by {}</h2>
+        <h2>Posts by {name}</h2>
         {/* This is the way to get the Params that we past by URL */}
-        {this.props.match.params.id}
+        {key}
       </div>
     );
   }

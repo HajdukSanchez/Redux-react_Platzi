@@ -1,8 +1,6 @@
 import axios from "axios";
 import { ALL_POSTS_BY_USER, LOADING, ERROR } from "../types/postsTypes";
-import * as usersTypes from "../types/postsTypes";
-
-const { ALL_USERS: gaveAllUsers } = usersTypes;
+import { ALL_USERS } from "../types/usersTypes";
 
 export const fetchPostsByUser = (id) => async (dispatch, getState) => {
   // We get the list of the users
@@ -20,15 +18,15 @@ export const fetchPostsByUser = (id) => async (dispatch, getState) => {
     // We don't overwrite the posts, we added to the array
     const postsNews = [...posts, response.data];
     // latest array of posts
-    const latestPosts = postsNews.length - 1;
+    const latestPostsKey = postsNews.length - 1;
     // We gave the latests array of posts
     const usersNews = [...users];
-    usersNews[userLatest] = {
-      ...users[userLatest],
-      latestPosts,
+    usersNews[id] = {
+      ...users[id],
+      latestPostsKey,
     };
     dispatch({
-      type: gaveAllUsers,
+      type: ALL_USERS,
       payload: usersNews,
     });
     dispatch({
